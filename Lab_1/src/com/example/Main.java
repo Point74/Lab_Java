@@ -1,14 +1,30 @@
 package com.example;
 
 // Combined Controller and Main class
+
+/**
+ * Основной класс для анализа погоды, объединяющий функции контроллера и точки входа.
+ */
+
 public class Main {
     private final WeatherData model;
     private final WeatherView view;
+
+    /**
+     * Конструктор для создания объекта WeatherAnalysis.
+     *
+     * @param model модель данных о погоде
+     * @param view  представление для отображения результатов
+     */
 
     public Main (WeatherData model, WeatherView view) {
         this.model = model;
         this.view = view;
     }
+
+    /**
+     * Анализировать погоду и отобразить результаты.
+     */
 
     public void analyzeWeather() {
         int snowfall = 0;
@@ -27,6 +43,13 @@ public class Main {
         String season = determineSeason(temperatures);
         view.displayResults(snowfall, rainfall, season);
     }
+
+    /**
+     * Определить время года на основе температурных данных.
+     *
+     * @param temperatures массив температур
+     * @return определенное время года
+     */
 
     private String determineSeason(double[] temperatures) {
         double averageTemp = calculateAverage(temperatures);
@@ -69,6 +92,13 @@ public class Main {
         }
     }
 
+    /**
+     * Вычислить среднее значение массива.
+     *
+     * @param arr массив чисел
+     * @return среднее значение
+     */
+
     private double calculateAverage(double[] arr) {
         double sum = 0;
         for (double v : arr) {
@@ -76,6 +106,12 @@ public class Main {
         }
         return sum / arr.length;
     }
+
+    /**
+     * Точка входа в программу.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
 
     public static void main(String[] args) {
         try {
@@ -92,6 +128,12 @@ public class Main {
         }
     }
 
+    /**
+     * Ввод температур (в данном примере генерируются случайные значения).
+     *
+     * @return массив температур за 30 дней
+     */
+
     private static double[] inputTemperatures() {
         // ввод температур
         // для примера используем случайные значения
@@ -101,6 +143,12 @@ public class Main {
         }
         return temperatures;
     }
+
+    /**
+     * Ввод осадков (в данном примере генерируются случайные значения).
+     *
+     * @return массив осадков за 30 дней
+     */
 
     private static double[] inputPrecipitation() {
         // ввод осадков
