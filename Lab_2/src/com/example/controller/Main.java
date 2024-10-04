@@ -1,11 +1,22 @@
-package com.example;
+package com.example.controller;
+
+import com.example.model.*;
+import com.example.view.ZooView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Главный класс приложения, объединяющий функциональность контроллера и точки входа.
+ */
+
 public class Main {
     private List<Enclosure> enclosures;
     private ZooView view;
+
+    /**
+     * Конструктор, инициализирующий зоопарк.
+     */
 
     public Main() {
         enclosures = new ArrayList<>();
@@ -16,6 +27,12 @@ public class Main {
         enclosures.add(new InfraredEnclosure(5));
         view = new ZooView();
     }
+
+    /**
+     * Распределяет животное по соответствующему вольеру.
+     *
+     * @param animal животное для распределения
+     */
 
     public void distributeAnimal(Animal animal) {
         for (Enclosure enclosure : enclosures) {
@@ -29,6 +46,12 @@ public class Main {
         }
         view.displayMessage("Не удалось найти подходящий вольер для животного");
     }
+
+    /**
+     * Точка входа в приложение.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
 
     public static void main(String[] args) {
         Main zoo = new Main();
