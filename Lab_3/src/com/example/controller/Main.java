@@ -5,6 +5,7 @@ import com.example.view.ZooView;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.util.Logger;
 
 /**
  * Главный класс приложения, объединяющий функциональность контроллера и точки входа.
@@ -37,9 +38,16 @@ public class Main {
     public void distributeAnimal(Animal animal) {
         for (Enclosure enclosure : enclosures) {
             try {
-                animal.move(enclosure);
+                var typeOfEnclosure = animal.move(enclosure);
+                switch (typeOfEnclosure) {
+                    case OPEN -> view.displayMessage("Копытное животное перемещенно в вольер");
+                    case INFRARED -> view.displayMessage("Хладнокровное животное перемещено в вольер с инфракрасный освещением");
+                    case NETTED -> view.displayMessage("Пернатое животное перемещено в вольер с сеткой");
+                    case AQUARIUM -> view.displayMessage("Водоплавающее животное перемещено в аквариум");
+                }
                 enclosure.addAnimal(animal);
                 return;
+
             } catch (IllegalArgumentException | IllegalStateException e) {
                 // Продолжаем поиск подходящего вольера
             }
