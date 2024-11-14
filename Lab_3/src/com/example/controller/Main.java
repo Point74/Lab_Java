@@ -14,6 +14,8 @@ import com.example.util.Logger;
 public class Main {
     private final List<Enclosure> enclosures;
     private final ZooView view;
+    private Logger logger;
+    private CollectionTester collectionTester;
 
     /**
      * Конструктор, инициализирующий зоопарк.
@@ -27,6 +29,8 @@ public class Main {
         enclosures.add(new OpenEnclosure(15));
         enclosures.add(new InfraredEnclosure(5));
         view = new ZooView();
+        logger = new Logger();
+        collectionTester = new CollectionTester(logger);
     }
 
     /**
@@ -56,6 +60,29 @@ public class Main {
     }
 
     /**
+     * Запускает тестирование коллекций для разных размеров.
+     */
+    private void runCollectionTests() {
+        int[] sizes = {10, 100};
+
+        for (int size : sizes) {
+            view.displayMessage("Testing ArrayList with size: " + size);
+            collectionTester.testArrayListOperations(size);
+
+            view.displayMessage("Testing LinkedList with size: " + size);
+            collectionTester.testLinkedListOperations(size);
+
+            // Вывод информации об ошибках после каждого теста
+            if (logger.getErrorCount() > 0) {
+                view.displayMessage("Errors occurred during testing:");
+                for (String error : logger.getErrors()) {
+                    view.displayMessage(error);
+                }
+            }
+        }
+    }
+
+    /**
      * Точка входа в приложение.
      *
      * @param args аргументы командной строки (не используются)
@@ -74,6 +101,19 @@ public class Main {
             zoo.distributeAnimal(avian);
             zoo.distributeAnimal(ungulate);
             zoo.distributeAnimal(coldBlooded);
+
+            // Запуск тестирования коллекций
+            zoo.view.displayMessage("\nStarting collection performance tests...");
+            zoo.runCollectionTests();
+            zoo.view.displayMessage("Collection performance tests completed.");
+
+            // Вывод итоговой статистики по ошибкам
+            if (zoo.logger.getErrorCount() > 0) {
+                zoo.view.displayMessage("\nTotal errors during execution: " + zoo.logger.getErrorCount());
+            } else {
+                zoo.view.displayMessage("\nAll operations completed successfully.");
+            }
+
         } catch (Exception e) {
             zoo.view.displayMessage("Ошибка: " + e.getMessage());
         }

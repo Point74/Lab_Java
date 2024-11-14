@@ -41,9 +41,9 @@ public class CollectionTester {
             logger.log("ArrayListLog.txt", "Start program: " + java.time.LocalDateTime.now());
             logger.log("ArrayListLog.txt", "ArrayList");
             for (int i = 0; i < size; i++) {
-                Animal product = generator.generateRandomAnimnal();
+                Animal animal = generator.generateRandomAnimnal();
                 long addStartTime = System.nanoTime();
-                animals.add(product);
+                animals.add(animal);
                 long addEndTime = System.nanoTime();
                 long addTime = addEndTime - addStartTime;
                 addTotalTime += addTime;

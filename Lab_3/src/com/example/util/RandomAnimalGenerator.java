@@ -31,13 +31,13 @@ public class RandomAnimalGenerator {
         int type = random.nextInt(4);
         switch (type) {
             case 0:
-                return new ColdBlooded(INFRARED[random.nextInt(INFRARED.length)], random.nextDouble() * 1000 + 500);
+                return new ColdBlooded(random.nextInt(30)+1, random.nextInt(5)+5);
             case 1:
-                return new Ungulate(OPEN[random.nextInt(OPEN.length)], random.nextDouble() * 500 + 300);
+                return new Ungulate(random.nextInt(30)+1, random.nextInt(5)+5);
             case 2:
-                return new Avian(NETTED[random.nextInt(NETTED.length)], random.nextDouble() * 2000 + 1000);
+                return new Avian(random.nextInt(30)+1, random.nextInt(5)+5);
             case 3:
-                return new Aquatic(AQUARIUM[random.nextInt(AQUARIUM.length)], random.nextDouble() * 1500 + 1000);
+                return new Aquatic(random.nextInt(30)+1, random.nextInt(5)+5);
             default:
                 return null;
         }
